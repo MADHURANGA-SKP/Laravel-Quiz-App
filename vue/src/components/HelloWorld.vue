@@ -1,4 +1,4 @@
-<script setup></script>
+<script></script>
 
 <template>
   <div
@@ -13,7 +13,7 @@
       <h2
         class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
       >
-        Sign in to your account
+        Sign in for free
       </h2>
     </div>
 
