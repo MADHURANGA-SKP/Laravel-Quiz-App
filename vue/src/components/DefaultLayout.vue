@@ -1,12 +1,4 @@
 <template>
-  <!--
-      This example requires updating your template:
-  
-      ```
-      <html class="h-full bg-gray-100">
-      <body class="h-full">
-      ```
-    -->
   <div class="min-h-full">
     <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -21,18 +13,18 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <a
+                <router-link
                   v-for="item in navigation"
                   :key="item.name"
-                  :href="item.href"
+                  :to="item.to"
+                  active-class="bg-gray-900 text-white"
                   :class="[
-                    item.current
-                      ? 'bg-gray-900 text-white'
+                    this.$route.name === item.to.name
+                      ? ''
                       : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'rounded-md px-3 py-2 text-sm font-medium',
                   ]"
-                  :aria-current="item.current ? 'page' : undefined"
-                  >{{ item.name }}</a
+                  >{{ item.name }}</router-link
                 >
               </div>
             </div>
@@ -113,19 +105,19 @@
 
       <DisclosurePanel class="md:hidden">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-          <DisclosureButton
+          <router-link
             v-for="item in navigation"
             :key="item.name"
             as="a"
-            :href="item.href"
+            :to="item.to"
+            active-class="'bg-gray-900 text-white"
             :class="[
-              item.current
-                ? 'bg-gray-900 text-white'
+              this.$route.name === item.to.name
+                ? ''
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white',
               'block rounded-md px-3 py-2 text-base font-medium',
             ]"
-            :aria-current="item.current ? 'page' : undefined"
-            >{{ item.name }}</DisclosureButton
+            >{{ item.name }}</router-link
           >
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
@@ -179,23 +171,21 @@ import {
   MenuItems,
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
+import { useStore } from "vuex";
+import { computed } from "vue";
+import store from "../store";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+const storex = useStore();
+
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Dashboard", to: { name: "Dashboard" } },
+  { name: "surveys", to: { name: "Surveys" } },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "#" },
 ];
+
+const user = computed(() => store.state.user.data);
 </script>

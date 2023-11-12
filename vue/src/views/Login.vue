@@ -73,7 +73,7 @@
       Not a member?
       {{ " " }}
       <router-link
-        :to="{ name: '/Register' }"
+        :to="{ name: 'Register' }"
         class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
       >
         Register for free
