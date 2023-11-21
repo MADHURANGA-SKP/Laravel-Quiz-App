@@ -86,7 +86,7 @@
       <div>
         <div class="flex items-center justify-between">
           <label
-            for="password_Confirmation"
+            for="password_confirmation"
             class="block text-sm font-medium leading-6 text-gray-900"
             >Password Confirmation</label
           >
@@ -100,12 +100,12 @@
         </div>
         <div class="mt-2">
           <input
-            id="password_Confirmation"
-            name="password_Confirmation"
+            id="password_confirmation"
+            name="password_confirmation"
             type="password"
-            autocomplete="current-password_Confirmation"
+            autocomplete="current-password_confirmation"
             required=""
-            v-model="user.password.confirmation"
+            v-model="user.password_confirmation"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder=" Password Confirmation"
           />
@@ -144,7 +144,7 @@ const user = {
   name: "",
   email: "",
   password: "",
-  password_Confirmation: "",
+  password_confirmation: "",
 };
 
 function register(ev) {
