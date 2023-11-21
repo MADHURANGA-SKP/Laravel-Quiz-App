@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\validate\Rules\Password;
+use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 
 
