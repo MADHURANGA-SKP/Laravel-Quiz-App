@@ -1,10 +1,8 @@
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img
-      class="mx-auto h-10 w-auto"
-      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-      alt="Your Company"
-    />
+    <div class="flex justify-center font-semibold text-xl text-indigo-600">
+      Dev.Help.UOV
+    </div>
     <h2
       class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
     >
@@ -13,7 +11,31 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="#" method="POST">
+    <form class="space-y-6" @submit="login">
+      <div
+        v-if="errorMsg"
+        class="flex item-center justify-between py-3 px-5 bg-red-500 text-white rounded"
+      >
+        {{ errorMsg }}
+        <span
+          @click="errorMsg = ''"
+          class="flex justify-center rounded-full transi cu hover:bg-[rgba(0,0,0,0.2)]"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </span>
+      </div>
       <div>
         <label
           for="email"
@@ -27,6 +49,7 @@
             type="email"
             autocomplete="email"
             required=""
+            v-model="user.email"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
@@ -53,9 +76,25 @@
             name="password"
             type="password"
             autocomplete="current-password"
+            v-model="user.password"
             required=""
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
+        </div>
+      </div>
+
+      <div class="flex item-center justify-between">
+        <div class="flex items-center">
+          <input
+            id="remember-me"
+            name="remember-me"
+            type="checkbox"
+            v-model="user.remember"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+          />
+          <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+            Remember me
+          </label>
         </div>
       </div>
 
@@ -82,6 +121,32 @@
   </div>
 </template>
 
-<script></script>
+<script setup>
+import store from "../store";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+const router = useRouter();
+const user = {
+  email: "",
+  password: "",
+  remember: false,
+};
+let errorMsg = ref("");
+
+function login(ev) {
+  ev.preventDefault();
+
+  store
+    .dispatch("login", user)
+    .then(() => {
+      router.push({
+        name: "Dashboard",
+      });
+    })
+    .catch((err) => {
+      errorMsg.value = err.response.data.error;
+    });
+}
+</script>
 
 <style scoped></style>
