@@ -55,11 +55,21 @@ class AuthController extends Controller
             ], 422);
         }
         $user = Auth::user();
-        $token = $user->createToken("main")->plainTextToken;;
+        $token = $user->createToken("main")->plainTextToken;
 
         return response([
             "user" => $user,
             "token" => $token,
+        ]);
+    }
+    
+    public function logout(){
+        /*@var User $user*/
+        $user = Auth::user();
+        //Revoke the the token that was used to authenticate the current request...
+        $user->currentAccessToken()->delete();
+        return response([
+            "success" => true
         ]);
     }
 }
