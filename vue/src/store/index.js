@@ -14,7 +14,7 @@ const tmpSurveys = [
     created_at: "2023-12-14",
     updated_at: "2023-12-14",
     expire_date: "2023-12-31",
-    quesions: [
+    questions: [
       {
         id: 1,
         type: "select",
@@ -99,7 +99,7 @@ const tmpSurveys = [
     created_at: "2023-12-14",
     updated_at: "2023-12-14",
     expire_date: "2023-12-31",
-    quesions: [],
+    questions: [],
   },
 
   {
@@ -114,7 +114,7 @@ const tmpSurveys = [
     created_at: "2023-12-14",
     updated_at: "2023-12-14",
     expire_date: "2023-12-31",
-    quesions: [],
+    questions: [],
   },
 ];
 
