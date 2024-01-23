@@ -63,7 +63,7 @@
               id="title"
               v-model="model.title"
               autocomplete="survey_title"
-              class="mt-1 h-7 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+              class="mt-1 h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
             />
           </div>
           <!-- description-->
@@ -119,7 +119,7 @@
           <!-- Survey fields-->
           <div class="px-4 py-5 bg-white xpace-y-6 sm:p-6">
             <h3
-              class="text-2xl font-semibold flex items-center justify-between"
+              class="text-2xl font-semibold flex items-center mb-5 justify-between"
             >
               Questions
               <button
@@ -153,12 +153,13 @@
             <div
               v-for="(question, index) in model.questions"
               :key="question.id"
+              class=""
             >
               <QuestionEditor
                 :question="question"
                 :index="index"
                 @change="questionChange"
-                @add="addQuestion"
+                @addQuestion="addQuestion"
                 @deleteQuestions="deleteQuestions"
               />
             </div>
