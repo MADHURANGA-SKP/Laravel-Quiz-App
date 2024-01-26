@@ -22,7 +22,7 @@ const tmpSurveys = [
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Recte dicis;",
         data: {
-          option: [
+          options: [
             { uuid: "68cd5791-c439-4a46-87d6-8d3a62775c2e", text: "USA" },
             { uuid: "d432942f-59b4-4e0c-a3f7-3464e109c069", text: "India" },
             { uuid: "04792f3c-931d-4865-8f44-78f188700835", text: "UK" },
@@ -37,7 +37,7 @@ const tmpSurveys = [
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Recte dicis;",
         data: {
-          option: [
+          options: [
             { uuid: "9372fdd1-7573-44b1-a769-a299832be95f", text: "Football" },
             {
               uuid: "283942b7-1f47-4232-8b9a-e27f4e05d32c",
@@ -56,7 +56,7 @@ const tmpSurveys = [
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Recte dicis;",
         data: {
-          option: [
+          options: [
             { uuid: "a49821fb-b321-4357-9765-2e39f273b84a", text: "Pop" },
             { uuid: "5c74213b-8d9a-4a01-852d-2e7f046210c3", text: "Rock" },
             { uuid: "12f3987a-4561-4b0e-890a-7239e1f0472d", text: "Hip-Hop" },
@@ -125,6 +125,7 @@ const store = createStore({
       token: sessionStorage.getItem("TOKEN"),
     },
     surveys: [...tmpSurveys],
+    questionTypes: ["text", "select", "radio", "checkbox", "textarea"],
   },
   getters: {},
   actions: {

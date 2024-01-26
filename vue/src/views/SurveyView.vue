@@ -63,7 +63,7 @@
               id="title"
               v-model="model.title"
               autocomplete="survey_title"
-              class="mt-1 h-7 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+              class="mt-1 h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
             />
           </div>
           <!-- description-->
@@ -119,13 +119,13 @@
           <!-- Survey fields-->
           <div class="px-4 py-5 bg-white xpace-y-6 sm:p-6">
             <h3
-              class="text-2xl font-semibold flex items-center justify-between"
+              class="text-2xl font-semibold flex items-center mb-5 justify-between"
             >
               Questions
               <button
                 class="flex item-center text-sm py-1 px-4 rounded-sm text-white bg-gray-600 hover:bg-gray-700"
                 type="butoon"
-                @click="addQuestions()"
+                @click="addQuestion()"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -153,13 +153,14 @@
             <div
               v-for="(question, index) in model.questions"
               :key="question.id"
+              class=""
             >
               <QuestionEditor
                 :question="question"
                 :index="index"
                 @change="questionChange"
-                @add="addQuestion"
-                @deleteQuestions="deleteQuestions"
+                @addQuestion="addQuestion"
+                @deleteQuestion="deleteQuestion"
               />
             </div>
           </div>
@@ -180,6 +181,7 @@
 
 <script setup>
 import store from "../store";
+import { v4 as uuidv4 } from "uuid";
 import { useRoute } from "vue-router";
 import { ref } from "vue";
 import PageComponent from "../components/PageComponent.vue";
@@ -199,6 +201,29 @@ if (route.params.id) {
   model.value = store.state.surveys.find(
     (s) => s.id === parseInt(route.params.id)
   );
+}
+
+function addQuestion(index) {
+  const newQuestion = {
+    id: uuidv4(),
+    type: "text",
+    question: "",
+    description: null,
+    data: {},
+  };
+  model.value.questions.splice(index, 0, newQuestion);
+}
+
+function deleteQuestion(question) {
+  model.value.questions = model.value.questions.filter((q) => q !== question);
+}
+
+function questionChange(question) {
+  model.value.questions = model.value.questions.map((q) => {
+    if (q.id === question.id) {
+      return question;
+    }
+  });
 }
 </script>
 
