@@ -22,3 +22,6 @@ MySQL:
 ![Quiz App Logo](./S2.png)
 ![Quiz App Logo](./S3.png)
 ![Quiz App Logo](./S4.png)
+![Quiz App Logo](./S5.png)
+![Quiz App Logo](./S6.png)
+![Quiz App Logo](./S7.png)
